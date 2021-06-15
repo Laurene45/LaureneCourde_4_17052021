@@ -18,17 +18,17 @@ const cgu = document.querySelector("#checkbox1");
 
 // --- DOM Element error ---
 const myError = document.getElementById("error");
-const myErrorEmail = document.getElementById("errorEmail")
+
 
 
 
 // --- Déroulement JavaScript ---
-
 // --- launch modal event : clic sur "je m'inscris" ---
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // --- Close modal (croix) - issue 1 ---
 closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
+
 
 // --- Validate Input ---
 // --- Validata Form ---
@@ -43,6 +43,7 @@ closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
 
 
 // --- Toutes les fonctions ---
+
 // --- Responsive NAV ---
 function editNav() {
   var x = document.getElementById("myTopnav");
@@ -78,7 +79,7 @@ form.addEventListener("submit", function(e) {
 
 
 // --- Fonction validate() ---
-function validate() {
+/*function validate() {
   // réflechir comme un array et se dire que chaque input est une ligne d'un tableau : methode push()
     let isFormValidate = [];
 
@@ -86,8 +87,7 @@ function validate() {
     isFormValidate.push(validateFirstName(firstName));
     isFormValidate.push(validateLastName(lastName));
     isFormValidate.push(validateEmail(eMail));
-    isFormValidate.push(validateBirthdate(birthDate));
-
+   
    
   
   //méthode includes() permet de déterminer si tableau contient une valeur et renvoie true sinon, false
@@ -145,15 +145,4 @@ function validateEmail(eMail) {
   //birthday
   //tournaments
   //city
-  //cgu
-
-
-
-
-
-
-
-
-
-
-
+  //cgu*/
