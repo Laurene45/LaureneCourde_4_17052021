@@ -1,12 +1,9 @@
-// --- DOM Elements ---
+// DOM Elements
 const modalbg = document.querySelector(".bground"); // background
 const modalBtn = document.querySelectorAll(".modal-btn"); // au clic sur le btn : faire apparaître le formulaire
 const formData = document.querySelectorAll(".formData"); //L'objet crée un ensemble de paires clef-valeur
 const closeModalBtn = document.querySelectorAll(".close") //ferme le formulaire
-
-
-// --- DOM Element form validate --- #issue 2b
-const form =  document.getElementById("myform");
+const form =  document.getElementById("myform"); // #issue 2b
 const firstName = document.querySelector("#first");
 const lastName = document.querySelector("#last");
 const eMail = document.querySelector("#email");
@@ -14,36 +11,18 @@ const birthDate = document.querySelector("#birthdate");
 const Tournaments = document.querySelector("#quantity");
 const city = document.querySelectorAll('.checkbox-input[name="location"]');
 const cgu = document.querySelector("#checkbox1");
-
-
-// --- DOM Element error ---
 const myError = document.getElementById("error");
 
 
-
-
-// --- Déroulement JavaScript ---
-// --- launch modal event : clic sur "je m'inscris" ---
+// Scénario JS
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// --- Close modal (croix) - issue 1 ---
 closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
-
-
-// --- Validate Input ---
-// --- Validata Form ---
+disabledSubmitButton();
 
 
 
 
-
-
-
-
-
-
-// --- Toutes les fonctions ---
-
+// Functions
 // --- Responsive NAV ---
 function editNav() {
   var x = document.getElementById("myTopnav");
@@ -54,15 +33,32 @@ function editNav() {
   }
 }
 
-// --- Fonction launch modal form ---
+// --- Launch modal form ---
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// ---  Fonction Close modal (croix) - issue 1 ---
+// --- Close modal (croix) - issue 1 ---
 function closeModal() {
   modalbg.style.display = 'none';
 }
+
+// --- Validate Form - issue 2-2 ---
+function disabledSubmitButton(){
+  document.querySelector('.btn-submit').disabled = true; // désactive par defaut submit tant que inptuts non validés
+  document.querySelector('.btn-submit').style.opacity = 0.5;
+  document.querySelector('.btn-submit').style.cursor = 'not-allowed';
+
+}
+
+function enableSubmitButton(){
+  document.querySelector('.btn-submit').disabled = false; // réactive le bouton submit 
+  document.querySelector('.btn-submit').style.opacity = 1;
+  document.querySelector('.btn-submit').style.cursor = 'cursor';
+
+}
+
+
 
 
 
@@ -72,14 +68,14 @@ function closeModal() {
 
 
 // --- Send form  ---
-form.addEventListener("submit", function(e) {
+/*form.addEventListener("submit", function(e) {
     e.preventDefault();
     validate();
-});
+});*/
 
 
 // --- Fonction validate() ---
-/*function validate() {
+function validate() {
   // réflechir comme un array et se dire que chaque input est une ligne d'un tableau : methode push()
     let isFormValidate = [];
 
@@ -142,7 +138,3 @@ function validateEmail(eMail) {
 };
 
 
-  //birthday
-  //tournaments
-  //city
-  //cgu*/
