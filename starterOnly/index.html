@@ -63,23 +63,28 @@
               name="reserve"
               action="index.html"
               method="get"
+              onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData" 
+                data-error="Veuillez entrer 2 caractères ou plus pour le champ du Prénom." data-error-visible="false"
+                >
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
+                  
                 />
                 <br>
               </div>
 
               <div
-                class="formData">
-                <label for="last">Nom</label><br>
+                class="formData"
+                data-error="Veuillez entrer 2 caractères ou plus pour le champ du Nom." data-error-visible="false"
+                >
+                <label for="last" >Nom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -90,7 +95,9 @@
               </div>
 
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer une adresse E-mail valide" data-error-visible="false"
+                >
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -102,7 +109,9 @@
               </div>
 
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez entrer votre date de naissance." data-error-visible="false"
+                >
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -114,7 +123,9 @@
               </div>
 
               <div
-                class="formData">
+                class="formData"
+                data-error="Veuillez saisir une valeur numérique." data-error-visible="false"
+                >
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input 
                   type="number" 
@@ -123,10 +134,14 @@
                   name="quantity" 
                   min="0" max="99">
               </div>
+
               <p class="text-label">Quelles villes ?</p>
 
               <div
-                class="formData">
+                class="formData"
+                id = "allLocations"
+                data-error="Veuillez sélectionner une ville." data-error-visible="false"
+                >
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -201,9 +216,11 @@
                 >
               </div>
 
-              <!-- infos complémentaires (conditions utilisation + newsletter)-->
+              <!-- infos complémentaires (conditions utilisation + newsletters)-->
               <div
-                class="formData">
+                class="formData"
+                data-error="Vous devez accepter les conditions d'utilisation." data-error-visible="false"
+                >
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -230,13 +247,15 @@
 
               <!-- bouton pour soumettre son formulaire -->
               <input
-                class="btn-submit"
+                class="btn-submit modal-btn"
                 type="submit"
                 class="button"
                 value="C'est parti"
               />
             </form>
-            </p>
+            <div id=success>
+                <p class="success-text">Merci ! Votre réservation a bien été reçue !</p>
+            </div>
           </div>
         </div>
       </div>

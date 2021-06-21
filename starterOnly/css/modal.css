@@ -208,6 +208,10 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
+/*pour comprendre le scenario de l'erreur:
+<div class="formData" data-error="le message d'erreur" data-error-visible="false"
+after indique que cela va s'afficher après */
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
@@ -226,12 +230,12 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
+
 input[data-error]::after {
     content: attr(data-error);
-    font-size: 0.4em;
+    font-size: 0.5em;
     color: red;
-} */
+} 
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -321,6 +325,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
+
 .btn-submit,
 .btn-signup {
   background: #fe142f;
@@ -333,6 +338,8 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -473,11 +480,25 @@ input[data-error]::after {
 .hero-section > .btn-signup {
   display: none;
 }
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
 }
+
+/* Modal success */
+
+#success {
+  display: none;
+}
+
+.success-text {
+  margin: 20px;
+  text-align: center;
+}
+
+
 @media screen and (max-width: 800px) {
   .hero-section {
     display: block;
@@ -526,4 +547,5 @@ footer {
     opacity: 1;
   }
 }
+
 

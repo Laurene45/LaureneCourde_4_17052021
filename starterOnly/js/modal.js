@@ -1,140 +1,211 @@
-// DOM Elements
+// DOM elements modal
 const modalbg = document.querySelector(".bground"); // background
 const modalBtn = document.querySelectorAll(".modal-btn"); // au clic sur le btn : faire apparaître le formulaire
-const formData = document.querySelectorAll(".formData"); //L'objet crée un ensemble de paires clef-valeur
 const closeModalBtn = document.querySelectorAll(".close") //ferme le formulaire
-const form =  document.getElementById("myform"); // #issue 2b
+
+// Form elements 
 const firstName = document.querySelector("#first");
 const lastName = document.querySelector("#last");
 const eMail = document.querySelector("#email");
 const birthDate = document.querySelector("#birthdate");
-const Tournaments = document.querySelector("#quantity");
-const city = document.querySelectorAll('.checkbox-input[name="location"]');
+const tournaments = document.querySelector("#quantity");
+const allLocations = document.getElementById('allLocations');
+const locations = document.querySelectorAll('#allLocations .checkbox-input');
 const cgu = document.querySelector("#checkbox1");
-const myError = document.getElementById("error");
+const form = document.querySelector("#myform");
+
+//Validations input
+let isFirstNameValid = false;
+let isLastNameValid = false;
+let isEmailValid = false;
+let isBirthDateValid = false;
+let isTournamentsValid =false;
+let isLocationsValid = false;
+let isCguValid = false;
 
 
-// Scénario JS
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
-disabledSubmitButton();
+
+//---SCENARIO JS ---
+modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
+closeModalBtn.forEach((close) => close.addEventListener('click', closeModal));
+
+disabledSubmitButton(); //bloque le bouton avant validation des Input
+
+//FIRSTNAME
+/* Ecouter l'évenènement par La méthode addEventListener() qui utilise les objets elements
+On passe 2 arguments à la méthode : 
+le nom d’un évènement qu’on souhaite prendre en charge 
+ainsi que le code à exécuter (une fonction) en cas de déclenchement de cet évènement.
+ici: 
+  évènement input et fonction non nommée.
+  On fait ressortir l'élément parent par la methode element.closest
+  une condition IF /else
+  insert le parent.setAttribute true /false pour erreur en ROUGE
+  si le prénom est valide ou non
+*/
+firstName.addEventListener('input', function(){
+  let parent = firstName.closest('.formData'); // élement parent
+  console.log(parent);
+
+  if (firstName.value.length < 2){
+    parent.setAttribute('data-error-visible', true);
+    isFirstNameValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isFirstNameValid = true;
+  }
+});
+//La méthode Elt.closest() renvoie l'ancêtre le plus proche de l'élément courant (ou l'élément courant) qui correspond aux sélecteurs passés comme paramètres. 
+//setAttribute : Ajoute ou change la valeur d'un attribut existant pour l'élément spécifié.
+
+//LASTNAME
+lastName.addEventListener('input', function(){
+  let parent = lastName.closest('.formData'); // élement parent
+  console.log(parent);
+
+  if (lastName.value.length < 2){
+    parent.setAttribute('data-error-visible', true);
+    isLastNameValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isLastNameValid = true;
+  }
+});
+
+//EMAIL
+eMail.addEventListener('input', function(){
+  let parent = eMail.closest('.formData'); 
+  console.log(parent);
+
+  if (!validateEmail(eMail.value)){
+    parent.setAttribute('data-error-visible', true);
+    isEmailValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isEmailValid = true;
+
+  }
+});
+
+//BIRTHDATE
+birthDate.addEventListener('input', function(){
+  let parent = birthDate.closest('.formData'); 
+  console.log(parent);
+
+  if (birthdate.value.length !== 10){
+    parent.setAttribute('data-error-visible', true);
+    isBirthDateValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isBirthDateValid = true;
+    
+  }
+});
+
+//TOURNAMENTS
+tournaments.addEventListener('input', function(){
+  let parent = tournaments.closest('.formData'); 
+  console.log(parent);
+
+  if (tournaments.value < 0 || tournaments.value.length === 0 ){
+    parent.setAttribute('data-error-visible', true);
+    isTournamentsValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isTournamentsValid = true;
+    
+  }
+});
+
+//CITY
+allLocations.addEventListener('change', function(){
+  let parent = allLocations.closest('.formData');
+  console.log(parent); 
+
+  if (!checkLocations(allLocations.value)){
+    parent.setAttribute('data-error-visible', true);
+    isLocationsValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isLocationsValid = true;
+    enableSubmitButton();
+  }
+});
+//L'événement change déclenche les éléments <input> <select> <textarea> lorsqu'un changement de leur valeur est réalisé par l'utilisateur.
+
+//CGU
+cgu.addEventListener('change', function(){
+  let parent = cgu.closest('.formData');
+  console.log(parent);
+
+  if (cgu.checked === false){
+    parent.setAttribute('data-error-visible', true);
+    isCguValid = false;
+  }else{
+    parent.setAttribute('data-error-visible', false);
+    isCguValid = true;
+
+  }
+});
 
 
 
 
 // Functions
-// --- Responsive NAV ---
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
+// --- Input city --- 
+function checkLocations() {
+  for (let i = 0; i < locations.length; i++) {
+      if (locations[i].checked) {
+          return true;
+      }
   }
+  return false;
 }
 
-// --- Launch modal form ---
-function launchModal() {
-  modalbg.style.display = "block";
-}
-
-// --- Close modal (croix) - issue 1 ---
+// --- Close modal form (croix) ---
 function closeModal() {
   modalbg.style.display = 'none';
 }
 
-// --- Validate Form - issue 2-2 ---
+// --- disable submit ---
 function disabledSubmitButton(){
   document.querySelector('.btn-submit').disabled = true; // désactive par defaut submit tant que inptuts non validés
   document.querySelector('.btn-submit').style.opacity = 0.5;
   document.querySelector('.btn-submit').style.cursor = 'not-allowed';
-
+  
 }
 
+// --- Responsive NAV ---
+function editNav() {
+  var x = document.getElementById('myTopnav');
+  if (x.className === 'topnav') {
+    x.className += 'responsive';
+  } else {
+    x.className = 'topnav';
+  }
+}
+// --- enable submit ---
 function enableSubmitButton(){
   document.querySelector('.btn-submit').disabled = false; // réactive le bouton submit 
   document.querySelector('.btn-submit').style.opacity = 1;
-  document.querySelector('.btn-submit').style.cursor = 'cursor';
+  document.querySelector('.btn-submit').style.cursor = 'grab';
+  
+}
 
+// --- Launch modal form ---
+function launchModal() {
+  modalbg.style.display = 'block';
+}
+
+// --- Input Email ---
+function validateEmail(email) {
+  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regex.test(String(email).toLowerCase());
 }
 
 
 
 
 
-
-
-
-
-
-// --- Send form  ---
-/*form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    validate();
-});*/
-
-
-// --- Fonction validate() ---
-function validate() {
-  // réflechir comme un array et se dire que chaque input est une ligne d'un tableau : methode push()
-    let isFormValidate = [];
-
-  // variable .push(fonction de l'input (sur la variable const correspondant à l'input))
-    isFormValidate.push(validateFirstName(firstName));
-    isFormValidate.push(validateLastName(lastName));
-    isFormValidate.push(validateEmail(eMail));
-   
-   
-  
-  //méthode includes() permet de déterminer si tableau contient une valeur et renvoie true sinon, false
-    if (!isFormValidate.includes(false)) {
-        form.style.display = 'none';
-    }
-  }
-
- 
-// --- Fonctions Input ---
-  //methode trim() : retirer les blancs en début et fin de chaîne
-
-  //firstname
-function validateFirstName(firstName) {
-  if (firstName.value.trim().length < 2) {
-      myError.innerText = "Veuillez entrer 2 caractères ou plus pour le champ du Prénom."; // ajout text HTML
-      myError.style.color = 'red';
-      myError.style.fontSize = '14px';
-      firstName.style.border = 'solid red 3px';  
-  } else {
-      myError.style.display = 'none';
-      firstName.style.border = 'solid green 3px';  
-  }
-};
-
-  //lastname
-function validateLastName(lastName) {
-  if (lastName.value.trim().length < 2) {
-      myError.innerText = "Veuillez entrer 2 caractères ou plus pour le champ du Prénom.";
-      myError.style.color = 'red';
-      myError.style.fontSize = '14px';
-      lastName.style.border = 'solid red 3px';
-  } else {
-      myError.style.display = 'none';
-      lastName.style.border = 'solid green 3px';
-  }
-};
-
-  //email  // erreur ici à la validation et au caractère manquant sur une adresse mail
-function validateEmail(eMail) {
-  if (eMail.value) {
-      myErrorEmail.innerText = "Veuillez entrer une adresse mail valide.";
-      myErrorEmail.style.color = 'red';
-      myErrorEmail.style.fontSize = '14px';
-      eMail.style.border = 'solid red 3px';
-      
-  } else {
-      myErrorEmail.style.display = 'none';
-      eMail.style.border = 'solid green 3px';
-      
-  }
-};
 
 
