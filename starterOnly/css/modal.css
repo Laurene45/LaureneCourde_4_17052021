@@ -3,6 +3,7 @@
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,12 +36,15 @@ img {
   overflow: hidden;
   margin: 3.5%;
 }
+
 .header-logo {
     float: left;
 }
+
 .main-navbar {
     float: right;
 }
+
 .topnav a {
   float: left;
   display: block;
@@ -91,8 +95,6 @@ img {
   }
 }
 
-
-
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
@@ -115,8 +117,6 @@ main {
   /*margin: 1px 20px 15px;*/
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -198,11 +198,13 @@ label {
   display: inline-block;
   margin-bottom: 11px;
 }
+
 input {
   padding: 8px;
   border: 0.8px solid #ccc;
   outline: none;
 }
+
 .text-control {
   margin: 0;
   padding: 8px;
@@ -227,9 +229,11 @@ after indique que cela va s'afficher après */
   opacity: 0;
   transition: 0.3s;
 }
+
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
+
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
@@ -239,6 +243,7 @@ input[data-error]::after {
     font-size: 0.5em;
     color: red;
 } 
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -246,6 +251,7 @@ input[data-error]::after {
   font-size: 12px;
   font-weight: normal;
 }
+
 .checkbox-label .checkbox-icon,
 .checkbox2-label .checkbox-icon {
   display: block;
@@ -260,6 +266,7 @@ input[data-error]::after {
   top: -1px;
   transition: 0.3s;
 }
+
 .checkbox-label .checkbox-icon::after,
 .checkbox2-label .checkbox-icon::after {
   content: "";
@@ -276,13 +283,16 @@ input[data-error]::after {
   transition: 0.3s;
   opacity: 0;
 }
+
 .checkbox-input {
   display: none;
 }
+
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
   opacity: 1;
 }
+
 .checkbox-input:checked + .checkbox2-label .checkbox-icon {
   background: #279e7a;
 }
@@ -291,6 +301,7 @@ input[data-error]::after {
   border: 0;
   background: #c4c4c4;
 }
+
 .checkbox2-label .checkbox-icon::after {
   width: 7px;
   height: 4px;
@@ -303,6 +314,7 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
+
 .close {
   position: absolute;
   right: 15px;
@@ -313,6 +325,7 @@ input[data-error]::after {
   cursor: pointer;
   transform: scale(0.7);
 }
+
 .close:before,
 .close:after {
   position: absolute;
@@ -322,9 +335,11 @@ input[data-error]::after {
   width: 3px;
   background-color: #fff;
 }
+
 .close:before {
   transform: rotate(45deg);
 }
+
 .close:after {
   transform: rotate(-45deg);
 }
@@ -341,7 +356,6 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
-
 
 /* custom select styles */
 .custom-select {
@@ -409,11 +423,13 @@ input[data-error]::after {
 .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 /* custom select end */
 .text-label {
   font-weight: normal;
   font-size: 16px;
 }
+
 .hero-section {
   min-height: 93vh;
   border-radius: 10px;
@@ -423,6 +439,7 @@ input[data-error]::after {
   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
 }
+
 .hero-content {
   padding: 51px 67px;
   grid-column: span 4;
@@ -432,6 +449,7 @@ input[data-error]::after {
   text-align: left;
   min-width: 424px;
 }
+
 .hero-content::after {
   content: "";
   width: 100%;
@@ -441,6 +459,7 @@ input[data-error]::after {
   right: -80px;
   top: 0;
 }
+
 .hero-content > * {
   position: relative;
   z-index: 1;
@@ -450,12 +469,14 @@ input[data-error]::after {
   font-weight: normal;
   white-space: nowrap;
 }
+
 .hero-text {
-  width: 146%;
+  max-width: 146%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
 }
+
 .btn-signup {
   outline: none;
   text-transform: capitalize;
@@ -464,9 +485,11 @@ input[data-error]::after {
   margin: 0;
   margin-top: 59px;
 }
+
 .hero-img {
   grid-column: span 8;
 }
+
 .hero-img img {
   width: 100%;
   height: 100%;
@@ -474,6 +497,7 @@ input[data-error]::after {
   padding: 0;
   object-fit: cover;
 }
+
 .copyrights {
   color: #fe142f;
   padding: 0;
@@ -481,6 +505,7 @@ input[data-error]::after {
   margin: 60px 0 30px;
   font-weight: bolder;
 }
+
 .hero-section > .btn-signup {
   display: none;
 }
@@ -490,9 +515,6 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-
-
-
 
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -517,6 +539,7 @@ footer {
   .hero-text {
     width: unset;
     font-size: 1.5rem;
+    max-width:90%;
   }
   .hero-img img {
     border-radius: 10px;
