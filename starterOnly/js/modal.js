@@ -155,6 +155,7 @@ form.addEventListener("submit", function(e) {
 });
 
 
+
 // Functions
 // --- Input city --- 
 function checkLocations() {
