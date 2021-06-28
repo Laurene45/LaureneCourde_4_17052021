@@ -137,7 +137,6 @@ form.addEventListener("submit", function(e) {
 
 // --- Functions ---
 // --- Birthdate ---
-
 function birthDateHandler(){
   showError(birthDate);
   isBirthDateValid = false;
@@ -185,7 +184,7 @@ function editNav() {
 function enableSubmitButton(){
   document.querySelector(".btn-submit").disabled = false; // réactive le bouton submit 
   document.querySelector(".btn-submit").style.opacity = 1;
-  document.querySelector(".btn-submit").style.cursor = "grab";
+  document.querySelector(".btn-submit").style.cursor = "cursor";
 }
 
 // --- Hide error ---
