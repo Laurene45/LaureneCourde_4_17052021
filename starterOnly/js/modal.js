@@ -32,8 +32,6 @@ closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
 disabledSubmitButton(); //bloque le bouton avant validation des Input
 
 
-
-
 //FIRSTNAME
 /* Ecouter l'évenènement par la méthode addEventListener() qui utilise les objets elements
 On passe 2 arguments à la méthode : 
@@ -41,123 +39,116 @@ On passe 2 arguments à la méthode :
 - le code à exécuter (une fonction) en cas de déclenchement de cet évènement.
 ici: 
   évènement input et fonction non nommée.
-  On fait ressortir l'élément parent par la methode element.closest
+  on ajoute le message d'erreur
   une condition If /else
-  On insert le parent.setAttribute true /false pour erreur en ROUGE
   si le prénom est valide ou non
   on ajoute une fonction au champ pour dire au formulaire qu'elle est valide
 */
 firstName.addEventListener("input", function(){
-  let parent = firstName.closest(".formData"); // élement parent
+  showError(firstName);
+  isFirstNameValid = false;
 
-  if (firstName.value.length < 2){
-    parent.setAttribute("data-error-visible", true);
-    isFirstNameValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (firstName.value.length >= 2){
+    hideError(firstName);
     isFirstNameValid = true;
   }
   isFormValidate()
 });
-//La méthode Elt.closest() renvoie l'ancêtre le plus proche de l'élément courant (ou l'élément courant) qui correspond aux sélecteurs passés comme paramètres. 
-//setAttribute : Ajoute ou change la valeur d'un attribut existant pour l'élément spécifié.
+
 
 //LASTNAME
 lastName.addEventListener("input", function(){
-  let parent = lastName.closest(".formData"); // élement parent
+  showError(lastName);
+  isLastNameValid = false;
 
-  if (lastName.value.length < 2){
-    parent.setAttribute("data-error-visible", true);
-    isLastNameValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (lastName.value.length >= 2){
+    hideError(lastName);
     isLastNameValid = true;
   }
   isFormValidate()
 });
 
+
 //EMAIL
 eMail.addEventListener("input", function(){
-  let parent = eMail.closest(".formData"); 
+  showError(eMail);
+  isEmailValid = false;
 
-  if (!validateEmail(eMail.value)){
-    parent.setAttribute("data-error-visible", true);
-    isEmailValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (validateEmail(eMail.value)){
+    hideError(eMail);
     isEmailValid = true;
   }
   isFormValidate()
 });
 
-//BIRTHDATE
-birthDate.addEventListener("input", function(){
-  let parent = birthDate.closest(".formData"); 
 
-  if (birthdate.value.length !== 10){
-    parent.setAttribute("data-error-visible", true);
-    isBirthDateValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
-    isBirthDateValid = true;
-  }
-  isFormValidate()
-});
+//BIRTHDATE
+birthDate.addEventListener("input", birthDateHandler);
+birthDate.addEventListener("keydown", birthDateHandler);
+
 
 //TOURNAMENTS
 tournaments.addEventListener("input", function(){
-  let parent = tournaments.closest(".formData"); 
+  showError(tournaments);
+  isTournamentsValid = false;
 
-  if (tournaments.value < 0 || tournaments.value.length === 0 ){
-    parent.setAttribute("data-error-visible", true);
-    isTournamentsValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (tournaments.value > 0 || tournaments.value.length !== 0 ){
+    hideError(tournaments);
     isTournamentsValid = true;
   }
   isFormValidate()
 });
 
+
 //CITY
 allLocations.addEventListener("change", function(){
-  let parent = allLocations.closest(".formData");
+  showError(allLocations);
+  isLocationsValid = false;
 
-  if (!checkLocations(allLocations.value)){
-    parent.setAttribute("data-error-visible", true);
-    isLocationsValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (checkLocations(allLocations.value)){
+    hideError(allLocations);
     isLocationsValid = true;
   }
   isFormValidate()
 });
-//L'événement change déclenche les éléments <input> <select> <textarea> lorsqu'un changement de leur valeur est réalisé par l'utilisateur.
+//L'evt change déclenche les éléments <input> <select> <textarea> lorsqu'un changement de leur valeur est réalisé par l'utilisateur.
+
 
 //CGU
 cgu.addEventListener("change", function(){
-  let parent = cgu.closest(".formData");
-  console.log(parent);
+  showError(cgu);
+  isCguValid = false;
 
-  if (cgu.checked === false){
-    parent.setAttribute("data-error-visible", true);
-    isCguValid = false;
-  }else{
-    parent.setAttribute("data-error-visible", false);
+  if (cgu.checked !== false){
+    hideError(cgu);
     isCguValid = true;
   }
   isFormValidate()
 });
 
+
 //--- Send Form Submit ---
 form.addEventListener("submit", function(e) {
   e.preventDefault();
-  console.log("12345");
+ 
 });
 
 
 
-// Functions
-// --- Input city --- 
+// --- Functions ---
+// --- Birthdate ---
+function birthDateHandler(){
+  showError(birthDate);
+  isBirthDateValid = false;
+
+  if (birthDate.value.length === 10){
+    hideError(birthDate);
+    isBirthDateValid = true;
+  }
+  isFormValidate()
+}
+
+// --- City --- 
 function checkLocations() {
   for (let i = 0; i < locations.length; i++) {
       if (locations[i].checked) {
@@ -188,6 +179,7 @@ function editNav() {
     x.className = "topnav";
   }
 }
+
 // --- Enable submit ---
 function enableSubmitButton(){
   document.querySelector(".btn-submit").disabled = false; // réactive le bouton submit 
@@ -195,10 +187,16 @@ function enableSubmitButton(){
   document.querySelector(".btn-submit").style.cursor = "grab";
 }
 
+// --- Hide error ---
+function hideError(element){
+  let parent = element.closest(".formData");
+  parent.setAttribute("data-error-visible", false);
+}
+
 // --- Validate Form ---
 function isFormValidate(){
   disabledSubmitButton();
-  if(isFirstNameValid && isEmailValid && isBirthDateValid && isTournamentsValid && isLocationsValid && isCguValid ){
+  if(isFirstNameValid && isLastNameValid && isEmailValid && isBirthDateValid && isTournamentsValid && isLocationsValid && isCguValid ){
     enableSubmitButton();
   }
 }
@@ -208,11 +206,13 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// --- Input Email ---
-function validateEmail(email) {
-  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return regex.test(String(email).toLowerCase());
+// ---- show Error ---
+function showError(element){
+  let parent = element.closest(".formData");
+  parent.setAttribute("data-error-visible", true);
 }
+//méthode Elt.closest() renvoie l'ancêtre le plus proche de l'élément courant (ou l'élément courant) qui correspond aux sélecteurs passés comme paramètres. 
+//setAttribute : Ajoute ou change la valeur d'un attribut existant pour l'élément spécifié.
 
 
 // --- Validate submit ---
@@ -220,7 +220,10 @@ function validate(e) {
   document.querySelector(".modal-body").innerHTML = "Merci ! Votre réservation a été reçue";
   document.querySelector(".modal-body").style.margin = "50px 10px";
   document.querySelector(".modal-body").style.textAlign = "center";
-  console.log("ça marche");
-  
 }
 
+// --- Input Email ---
+function validateEmail(email) {
+  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regex.test(String(email).toLowerCase());
+}
