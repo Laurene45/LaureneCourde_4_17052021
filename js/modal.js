@@ -184,7 +184,7 @@ function editNav() {
 function enableSubmitButton(){
   document.querySelector(".btn-submit").disabled = false; // réactive le bouton submit 
   document.querySelector(".btn-submit").style.opacity = 1;
-  document.querySelector(".btn-submit").style.cursor = "pointer";
+  document.querySelector(".btn-submit").style.cursor = "grab";
 }
 
 // --- Hide error ---
