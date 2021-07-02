@@ -8,7 +8,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  object-fit: cover;
+  
 }
 
 /* Landing Page */
@@ -93,6 +93,9 @@ img {
     display: block;
     text-align: left;
   }
+  main{
+    margin-bottom: -20px;
+  }
 }
 
  @media screen and (max-width: 540px) {
@@ -104,6 +107,9 @@ img {
   }
   .header-logo img {
     width: 250px;
+  }
+  .hero-section{
+    margin-bottom: -30px;
   }
 }  
 
@@ -431,7 +437,7 @@ input[data-error]::after {
 }
 
 .hero-section {
-  min-height: 93vh;
+  /*min-height: 93vh;*/
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -465,13 +471,13 @@ input[data-error]::after {
   z-index: 1;
 }
 .hero-headline {
-  font-size: 5.1rem;
+  font-size: 5rem;
   font-weight: normal;
   white-space: nowrap;
 }
 
 .hero-text {
-  max-width: 146%;
+  max-width: 100%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
@@ -495,7 +501,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
-  object-fit: cover;
+  
 }
 
 .copyrights {
@@ -508,6 +514,25 @@ input[data-error]::after {
 
 .hero-section > .btn-signup {
   display: none;
+}
+
+
+.form-validated {
+  display: none;
+  font-size: 1.5rem;
+  padding: 15px 8%;
+  margin: 15px auto;
+}
+.form-validated__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.form-validated__text {
+  width: 100%;
+  margin: 15rem auto;
+  text-align: center;
+  font-weight: normal;
 }
 
 footer {
@@ -533,12 +558,12 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4rem;
+    font-size: 3rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1rem;
     max-width:90%;
   }
   .hero-img img {

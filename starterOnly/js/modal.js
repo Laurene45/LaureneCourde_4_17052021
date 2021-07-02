@@ -2,6 +2,7 @@
 const modalbg = document.querySelector(".bground"); // background
 const modalBtn = document.querySelectorAll(".modal-btn"); // au clic sur le btn : faire apparaître le formulaire
 const closeModalBtn = document.querySelectorAll(".close"); //ferme le formulaire
+const btnClose = document.querySelector(".btnclose"); // btn fermer à validation
 
 // Form elements 
 const firstName = document.querySelector("#first");
@@ -13,6 +14,7 @@ const allLocations = document.getElementById("allLocations");
 const locations = document.querySelectorAll("[name=location]");
 const cgu = document.querySelector("#checkbox1");
 const form = document.querySelector("#myform");
+const validForm = document.querySelector(".form-validated");
 
 //Validations input
 let isFirstNameValid = false;
@@ -28,6 +30,7 @@ let isCguValid = true;
 //---SCENARIO JS ---
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 closeModalBtn.forEach((close) => close.addEventListener("click", closeModal));
+
 
 disabledSubmitButton(); //bloque le bouton avant validation des Input
 
@@ -133,6 +136,11 @@ form.addEventListener("submit", function(e) {
  
 });
 
+// --- fermeture modal par le bouton fermer ---
+btnClose.addEventListener("click",function(){
+  closeModal();
+
+});
 
 
 // --- Functions ---
@@ -148,6 +156,7 @@ function birthDateHandler(){
   isFormValidate()
 }
 
+
 // --- City --- 
 function checkLocations() {
   for (let i = 0; i < locations.length; i++) {
@@ -162,6 +171,7 @@ function checkLocations() {
 function closeModal() {
   modalbg.style.display = "none";
 }
+
 
 // --- Disable submit ---
 function disabledSubmitButton(){
@@ -217,9 +227,8 @@ function showError(element){
 
 // --- Validate submit ---
 function validate(e) {
-  document.querySelector(".modal-body").innerHTML = "Merci ! Votre réservation a été reçue";
-  document.querySelector(".modal-body").style.margin = "50px 10px";
-  document.querySelector(".modal-body").style.textAlign = "center";
+  document.querySelector(".form-validated").style.display = "block";
+  form.style.display = "none";
 }
 
 // --- Input Email ---
